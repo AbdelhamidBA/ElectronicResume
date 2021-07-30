@@ -1,0 +1,134 @@
+    @import url("../fonts/fonts.css");
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    @media screen and (max-width:1440px) {
+        .menubar {
+            display: none;
+        }
+    }
+    
+    @media screen and (max-width:1024px) {
+        .menubar {
+            display: flex;
+        }
+        .generalinfo {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: -290px;
+            z-index: 999999;
+            transition: transform 1s ease-in-out;
+        }
+        #closeInfo {
+            display: block;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+        }
+        #contact-info ul li {
+            font-size: 12pt;
+        }
+    }
+    
+    @media screen and (max-width:768px) {
+        .education,
+        .experience,
+        .certificat {
+            flex: 0 1 calc( 50% - 10px)
+        }
+        #gallery-section {
+            column-count: 2;
+        }
+        #contact-info ul li {
+            font-size: 8pt;
+            line-height: 20px;
+        }
+    }
+    
+    @media screen and (max-width:425px) {
+        .education,
+        .experience,
+        .certificat {
+            flex: 0 1 100%
+        }
+        #gallery-section {
+            column-count: 2;
+        }
+        #contact-info ul li {
+            font-size: 10pt;
+            line-height: 20px;
+        }
+        .contact textarea {
+            overflow-y: scroll;
+        }
+        .copyright {
+            font-size: 10pt;
+        }
+        #contact-section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            gap: 1em;
+        }
+    }
+    
+    @media screen and (max-width:425px) {
+        .education,
+        .experience,
+        .certificat {
+            flex: 0 1 100%
+        }
+        #gallery-section {
+            column-count: 2;
+        }
+        #contact-info ul li {
+            font-size: 10pt;
+            line-height: 20px;
+        }
+        .contact textarea {
+            overflow-y: scroll;
+        }
+        .copyright {
+            font-size: 10pt;
+        }
+        #contact-section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            gap: 1em;
+        }
+    }
+    
+    @media screen and (max-width:375px) {
+        #contact-info ul li {
+            font-size: 8pt;
+            line-height: 20px;
+        }
+        #gallery-section {
+            column-count: 1;
+        }
+    }
+    
+    @media screen and (max-width:320px) {
+        #contact-info ul li {
+            font-size: 8pt;
+            line-height: 20px;
+        }
+        #contact-info {
+            padding: 15px;
+        }
+        #gallery-section {
+            column-count: 1;
+        }
+        .copyright {
+            font-size: 8pt;
+        }
+    }
