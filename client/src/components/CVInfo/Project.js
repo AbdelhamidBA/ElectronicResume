@@ -34,33 +34,24 @@ const Project = ({ getProject, project, loading, error }) => {
 
     loading === false && project !== {} && (
         projects = project.data.map((proj, index) => {
-            return ( <
-                div key = { index }
-                className = "image" >
-                <
-                img src = { `uploads/${proj.project_img}` }
-                id = "projimg" / >
-                <
-                div className = "image-info" >
-                <
-                i className = "fas fa-expand fa-lg zlatan"
-                id = "viewimg" > < /i> <
-                p > { proj.project_desc } < /p> <
-                /div> <
-                /div>
+            return ( 
+            <div key = { index }className = "image" >
+                <img src = { `uploads/${proj.project_img}` }id = "projimg" / >
+                <div className = "image-info" >
+                    <i className = "fas fa-expand fa-lg zlatan"id = "viewimg" > </i> 
+                    <p> { proj.project_desc } </p> 
+                    </div> 
+                </div>
             )
         })
     )
 
 
-    return ( <
-        div className = "cv-section"
-        id = "gallery-info" >
-        <
-        h3 > Projects < /h3> <
-        div id = "gallery-section" > { projects } <
-        /div> <
-        /div>
+    return ( 
+        <div className = "cv-section"id = "gallery-info" >
+            <h3> Projects </h3> 
+            <div id = "gallery-section" > { projects } </div> 
+            </div>
     )
 }
 Project.propTypes = {
