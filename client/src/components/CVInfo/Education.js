@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {getEducation} from '../../actions/education'
@@ -6,16 +6,32 @@ import {getEducation} from '../../actions/education'
 
 
 const Education = ({getEducation,education,loading,error}) => {
+            
+    const [edu_bool, setEduBool] = useState(false)
+   
     useEffect(()=>{
-        getEducation()
-    },[])
+        if(edu_bool === false){
+            getEducation()
+            setEduBool(true)
+        } 
+        else
+        {
+            setTimeout(() => {
+                getEducation()
+              }, 5000);
+        }
+        
+    },[education])
+
+   
+
     let educations = ""
     if(!loading && education != {}){
         educations = education.data.map((ed,index) =>(
             <div key={index} className="education">
                 <h3>{ed.degree}</h3>
                 <p id="university">{ed.university}</p>
-                <p id="edu-date">{ed.start_year} - {ed.end_year}</p>
+                <p id="edu-date">{ed.start_year} {ed.end_year !== "" && "-"+ ed.end_year}</p>
             </div>
         ))
     }

@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import { connect } from 'react-redux';
 import PersonalInfo from '../components/Information/PersonalInfo'
 import Credentials from './Information/Credentials';
@@ -8,10 +8,20 @@ import { getGeneralInfo } from '../actions/profile';
 import $ from 'jquery'
 
 const GeneralInfo = ({getGeneralInfo,general_info,error,loading}) => {
+    const [info_bool, setInfoBool] = useState(false)
+    
     useEffect(() => {
-        getGeneralInfo()
-    },[])
-    useEffect(() => {
+        if(info_bool === false) {
+            getGeneralInfo()
+            setInfoBool(true)
+        }
+        else
+        {
+            setTimeout(()=>{
+                getGeneralInfo()
+            },5000)
+        }
+
         $(document).ready(function() {
             $("circle").each(function() {
                 var percent = this.id;
@@ -71,7 +81,8 @@ const GeneralInfo = ({getGeneralInfo,general_info,error,loading}) => {
                 });
             });
         });
-        });
+    },[general_info])
+  
     return (loading == false && general_info != {} ? 
     <div className="generalinfo">
         <Credentials/>

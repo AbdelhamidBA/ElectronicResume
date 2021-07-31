@@ -1,13 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {getProject} from '../../actions/project'
+import { getProject } from '../../actions/project'
 import $ from 'jquery'
-const Project = ({getProject,project,loading,error}) => {
-    useEffect(()=>{
-        getProject()
+const Project = ({ getProject, project, loading, error }) => {
+    const [projBool, setProjBool] = useState(false)
+    useEffect(() => {
+        if (projBool === false) {
+            getProject()
+            setProjBool(true)
+        } else {
+            setTimeout(() => {
+                getProject()
+            }, 5000)
+        }
+
+
         $("[id^=viewimg]").on("click", function() {
-            console.log("HELOOLLOLO")
             var parent = $(this).parent().parent()
             var imgtoview = parent.children("#projimg").attr("src")
             var previewer = $(".img-previewer")
@@ -17,44 +26,51 @@ const Project = ({getProject,project,loading,error}) => {
                 previewer.css("display", "none")
             });
         });
-    },[project])
+    }, [project])
 
-    
+
 
     let projects = ""
 
-    loading === false && project !=={} && (
-        projects = project.data.map((proj,index) => {
-            return(
-                <div key={index} className="image">
-                    <img src={`uploads/${proj.project_img}`} id="projimg"/>
-                    <div className="image-info">
-                        <i className="fas fa-expand fa-lg zlatan" id="viewimg"></i>
-                        <p>{proj.project_desc}</p>
-                    </div>
-                </div>
+    loading === false && project !== {} && (
+        projects = project.data.map((proj, index) => {
+            return ( <
+                div key = { index }
+                className = "image" >
+                <
+                img src = { `uploads/${proj.project_img}` }
+                id = "projimg" / >
+                <
+                div className = "image-info" >
+                <
+                i className = "fas fa-expand fa-lg zlatan"
+                id = "viewimg" > < /i> <
+                p > { proj.project_desc } < /p> <
+                /div> <
+                /div>
             )
         })
-        ) 
-        
+    )
 
-    return (
-        <div className="cv-section" id="gallery-info">
-            <h3>Projects</h3>
-            <div id="gallery-section">
-                {projects}
-            </div>
-        </div>
+
+    return ( <
+        div className = "cv-section"
+        id = "gallery-info" >
+        <
+        h3 > Projects < /h3> <
+        div id = "gallery-section" > { projects } <
+        /div> <
+        /div>
     )
 }
 Project.propTypes = {
-    getProject:PropTypes.func.isRequired,
-    project:PropTypes.object.isRequired,
+    getProject: PropTypes.func.isRequired,
+    project: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-    project:state.project.project,
-    loading:state.project.loading,
-    error:state.project.error
+    project: state.project.project,
+    loading: state.project.loading,
+    error: state.project.error
 })
-export default connect(mapStateToProps,{getProject})(Project)
+export default connect(mapStateToProps, { getProject })(Project)

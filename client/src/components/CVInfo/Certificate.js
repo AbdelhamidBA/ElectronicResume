@@ -1,13 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { getCertificate } from '../../actions/certificate'
 import certificate from '../../reducers/certificate'
 const Certificate = ({getCertificate,certificate,loading,error}) => {
-
+    const [certBool, setCertBool] = useState(false)
     useEffect(()=>{
-        getCertificate()
-    },[])
+
+            if (certBool === false) {
+                getCertificate()
+                setCertBool(true)
+            } else {
+                setTimeout(() => {
+                    getCertificate()
+                }, 5000)
+            }
+  
+    },[certificate])
     
     let certificates = ""
     if(loading === false && certificate !== {})
